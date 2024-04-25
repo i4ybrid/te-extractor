@@ -1,0 +1,25 @@
+{
+  "name": "te-bootstrap-extractor",
+  "version": "1.0.0",
+  "description": "Extract zips from the type extension bootstrap using this CLI",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "npm run build:default",
+    "build:win": "pkg --target node14-win-x64 --output dist/te-bootstrap-extractor-win-x64 src/index.js",
+    "build:linux": "pkg --target node14-linux-x64 --output dist/te-bootstrap-extractor-linux-x64 src/index.js",
+    "build:macos": "pkg --target node14-macos-x64 --output dist/te-bootstrap-extractor-macos-x64 src/index.js",
+    "build:default": "npm run build:$(echo \"$npm_config_user_agent\" | grep -o 'mac' | head -n1 || echo 'unknown')",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Hu",
+  "license": "ISC",
+  "dependencies": {
+    "adm-zip": "^0.5.12",
+    "inquirer": "^9.2.19"
+  },
+  "devDependencies": {
+    "pkg": "^5.5.0"
+  }
+}
