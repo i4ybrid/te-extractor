@@ -1,23 +1,33 @@
 {
-  "name": "te-bootstrap-extractor",
+  "name": "te-manager",
   "version": "1.0.0",
-  "description": "Extract zips from the type extension bootstrap using this CLI",
-  "main": "src/index.js",
+  "description": "Extract and compress zips from the type extension bootstrap using this CLI",
+  "main": "src/te-extractor.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
     "build": "npm run build:default",
-    "build:win": "pkg --target node14-win-x64 --output dist/te-bootstrap-extractor-win-x64 src/index.js",
+    "build:win32": "pkg --target node14-win-x64 --output dist/te-bootstrap-extractor-win-x64 src/index.js",
     "build:linux": "pkg --target node14-linux-x64 --output dist/te-bootstrap-extractor-linux-x64 src/index.js",
-    "build:macos": "pkg --target node14-macos-x64 --output dist/te-bootstrap-extractor-macos-x64 src/index.js",
-    "build:default": "npm run build:$(echo \"$npm_config_user_agent\" | grep -o 'mac' | head -n1 || echo 'unknown')",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:darwin-x64": "pkg --target node14-macos-x64 --output dist/te-bootstrap-extractor-macos-x64 src/index.js",
+    "build:darwin": "pkg --target node14-macos-arm64 --output dist/te-bootstrap-extractor-macos-arm64 src/index.js",
+    "build:default": "npm run build:$(node -e \"console.log(process.platform)\")",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "te-build": "node src/te-builder.js",
+    "te-extract": "node src/te-extractor.js",
+    "start": "node src/te-extractor.js"
+  },
+  "bin": {
+    "te-extract": "./src/te-extractor.js",
+    "te-build": "./src/te-builder.js"
   },
   "author": "Eric Hu",
   "license": "ISC",
   "dependencies": {
     "adm-zip": "^0.5.12",
-    "inquirer": "^9.2.19"
+    "archiver": "^7.0.1",
+    "fs-extra": "^11.2.0",
+    "inquirer-promise": "^1.0.0",
+    "temp": "^0.9.4"
   },
   "devDependencies": {
     "pkg": "^5.5.0"
