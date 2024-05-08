@@ -68,7 +68,7 @@ export function replaceFilenames(folderPath, replacePayload) {
     const folderBasename = path.basename(currentPath);
     if (currentPath !== folderPath && replacePayload[folderBasename]) {
       const parentFolder = path.dirname(currentPath);
-      const newName = replaceFilenames[folderBasename];
+      const newName = replacePayload[folderBasename];
       const newPath = path.join(parentFolder, newName);
       fs.renameSync(currentPath, newPath);
       console.log(`Renamed folder: ${currentPath} -> ${newPath}`);
