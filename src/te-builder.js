@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import temp from 'temp';
 import fs from 'fs-extra';
 import path from 'path';
